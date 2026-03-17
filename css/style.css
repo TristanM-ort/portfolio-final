@@ -1,4 +1,95 @@
-/* Styles pour les flux RSS */
+/* =========================
+   STYLE GLOBAL PORTFOLIO
+========================= */
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* NAVIGATION */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #111;
+    color: white;
+}
+
+nav h3 {
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+/* HEADER */
+
+header {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+header img {
+    width: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+header button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+header button:hover {
+    background-color: #0056b3;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    color: white;
+    margin-top: 50px;
+}
+
+/* =========================
+   STYLES RSS (TON CODE)
+========================= */
 
 .rss-container {
     margin: 2rem auto;
@@ -73,7 +164,8 @@
     font-size: 0.9rem;
 }
 
-/* Mode clair/sombre - adaptation */
+/* MODE CLAIR */
+
 .light-mode .source-articles {
     background: #e9ecef;
 }
@@ -86,13 +178,25 @@
     color: #212529;
 }
 
-/* Responsive */
+/* RESPONSIVE */
+
 @media (max-width: 768px) {
-    .rss-container {
-        padding: 0 0.5rem;
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
     }
-    
-    .source-header {
-        font-size: 1rem;
+
+    .nav-links {
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+
+    .nav-links a {
+        margin: 5px 10px 5px 0;
+    }
+
+    header {
+        padding: 50px 15px;
     }
 }
