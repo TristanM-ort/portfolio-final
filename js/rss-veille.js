@@ -1,18 +1,17 @@
 // js/rss-veille.js
-// Veille technologique sur les ransomwares
+// Veille ransomware – Mars 2026 – flux corrigés
 
-$(document).ready(function() {
-    
-    // Liste des sources RSS pour la veille sur les ransomwares
+$(document).ready(function () {
+
     const sourcesVeille = [
         {
-            nom: "CERT-FR (Alertes sécurité)",
-            url: "https://www.cert.ssi.gouv.fr/feed/",
+            nom: "CERT-FR – Bulletins",
+            url: "https://www.cert.ssi.gouv.fr/rss/certfr-actualite.xml",
             couleur: "#dc3545"
         },
         {
-            nom: "ANSSI - Actualités",
-            url: "https://www.ssi.gouv.fr/feed/",
+            nom: "ANSSI – Actualités",
+            url: "https://cyber.gouv.fr/actualites/rss",
             couleur: "#0052a5"
         },
         {
@@ -21,8 +20,8 @@ $(document).ready(function() {
             couleur: "#2c3e50"
         },
         {
-            nom: "LeMagIT - Sécurité",
-            url: "https://www.lemagit.fr/rss/thematique/securite/",
+            nom: "LeMagIT – Sécurité",
+            url: "https://www.lemagit.fr/actualites/rss?thematique=securite",
             couleur: "#e67e22"
         },
         {
@@ -37,67 +36,84 @@ $(document).ready(function() {
         },
         {
             nom: "Global Security Mag",
-            url: "https://www.globalsecuritymag.fr/feed/",
+            url: "https://www.globalsecuritymag.fr/spip.php?page=rss&id_rubrique=1",
             couleur: "#9b59b6"
+        },
+        // Sources bonus très pertinentes ransomware 2025-2026
+        {
+            nom: "BleepingComputer – Security",
+            url: "https://www.bleepingcomputer.com/feed/",
+            couleur: "#d35400"
         }
     ];
 
-    // Vider le conteneur avant d'ajouter les sources
     $("#rss-flux").empty();
 
-    // Pour chaque source, créer une section et charger le flux RSS
-    sourcesVeille.forEach(function(source) {
-        // Créer la section pour cette source
+    sourcesVeille.forEach(function (source) {
+
+        const safeId = source.nom.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+        const containerId = `#feed-${safeId}`;
+
         const sourceSection = `
             <div class="source-section" data-source="${source.nom}">
                 <div class="source-header" style="background: ${source.couleur};">
                     ${source.nom}
                 </div>
-                <div class="source-articles" id="feed-${source.nom.replace(/\s+/g, '-')}"></div>
+                <div class="source-articles" id="feed-${safeId}"></div>
             </div>
         `;
-        
-        // Ajouter la section au conteneur
+
         $("#rss-flux").append(sourceSection);
-        
-        // ID du conteneur pour cette source
-        const containerId = `#feed-${source.nom.replace(/\s+/g, '-')}`;
-        
-        // Charger le flux RSS pour cette source
+
         $(containerId).rss(source.url, {
-            limit: 5,
-            layoutTemplate: '<div class="rss-items">{entries}</div>',
+            limit: 4,               // réduit à 4 pour ne pas surcharger la page
+            order: "newest",        // ← très important
+            layoutTemplate: "<div class='rss-items'>{entries}</div>",
             entryTemplate: `
                 <div class="rss-item">
-                    <h3><a href="{url}" target="_blank" rel="noopener noreferrer">{title}</a></h3>
+                    <h4><a href="{url}" target="_blank" rel="noopener noreferrer">{title}</a></h4>
                     <div class="rss-date">{date}</div>
-                    <div class="rss-description">{shortBodyPlain}</div>
+                    <div class="rss-description">{shortBody}</div>
                 </div>
             `,
             tokens: {
-                date: function(entry) {
-                    const date = new Date(entry.publishedDate);
-                    return date.toLocaleDateString('fr-FR', {
+                date: function (entry) {
+                    if (!entry.publishedDate) return "Date inconnue";
+                    const d = new Date(entry.publishedDate);
+                    return d.toLocaleDateString('fr-FR', {
+                        weekday: 'short',
                         day: '2-digit',
-                        month: '2-digit',
+                        month: 'short',
                         year: 'numeric',
                         hour: '2-digit',
                         minute: '2-digit'
                     });
                 },
-                shortBodyPlain: function(entry) {
-                    const desc = $(entry.description).text() || entry.contentSnippet || '';
-                    return desc.length > 150 ? desc.substring(0, 150) + '...' : desc;
+                shortBody: function (entry) {
+                    let text = "";
+                    if (entry.description) {
+                        text = $(entry.description).text().trim();
+                    } else if (entry.content) {
+                        text = $(entry.content).text().trim();
+                    } else if (entry.contentSnippet) {
+                        text = entry.contentSnippet.trim();
+                    }
+                    return text.length > 180 ? text.substring(0, 180) + "…" : text;
                 }
             },
-            error: function() {
+            success: function () {
+                // Optionnel : tri global des articles les plus récents en premier ?
+                // → nécessite de collecter tous les articles puis de les trier après chargement
+            },
+            error: function (xhr) {
                 $(containerId).html(`
-                    <div class="rss-item">
-                        <p style="color: #dc3545; padding: 1rem;">
-                            ⚠️ Flux temporairement inaccessible. 
-                            <br>Consultez directement le site : 
-                            <a href="${source.url.replace('/feed', '').replace('feed/', '')}" target="_blank">
-                                ${source.nom}
+                    <div class="rss-item error">
+                        <p style="color:#dc3545; padding:1rem;">
+                            ⚠️ Impossible de charger le flux<br>
+                            <small>${source.url}</small><br>
+                            <a href="${source.url.replace(/\/feed\/?$/, '').replace(/\/rss\/?$/, '')}" 
+                               target="_blank" style="color:#0066cc;">
+                               → Aller sur le site
                             </a>
                         </p>
                     </div>
@@ -106,13 +122,16 @@ $(document).ready(function() {
         });
     });
 
-    // Ajouter une info sur la mise à jour
-    const updateInfo = `
-        <div style="text-align: center; margin-top: 2rem; color: #6c757d; font-size: 0.9rem;">
-            <p>📡 Flux mis à jour automatiquement - Dernière actualisation : ${new Date().toLocaleString('fr-FR')}</p>
-            <p>Sources officielles de cybersécurité</p>
+    // Information finale
+    const now = new Date().toLocaleString('fr-FR', {
+        dateStyle: "medium",
+        timeStyle: "short"
+    });
+
+    $("#rss-flux").after(`
+        <div class="update-info">
+            <p>📡 Flux mis à jour automatiquement – Dernière actualisation : ${now}</p>
+            <p>Sources : CERT-FR, ANSSI, médias spécialisés cybersécurité & ransomware</p>
         </div>
-    `;
-    
-    $("#rss-flux").after(updateInfo);
+    `);
 });
