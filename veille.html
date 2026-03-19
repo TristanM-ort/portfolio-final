@@ -2,117 +2,98 @@
 <html lang="fr">
 
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description" content="Veille technologique de Tristan MOMHA sur les ransomwares et la cybersécurité">
-
-<title>Veille technologique | Tristan MOMHA</title>
-
-<link rel="stylesheet" href="css/style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-rss@3.3.0/dist/jquery.rss.min.js" defer></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Veille technologique de Tristan MOMHA sur les ransomwares et la cybersécurité">
+    <title>Veille technologique | Tristan MOMHA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/veille-rss.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
-<nav>
-
-<h3>Tristan MOMHA</h3>
-
-<div class="nav-links">
-
-<a href="index.html">Accueil</a>
-<a href="presentation.html">Présentation</a>
-<a href="competences.html">Compétences</a>
-<a href="projets.html">Projets</a>
-<a href="stage.html">Stage</a>
-<a href="parcours.html">Parcours</a>
-<a href="cv.html">CV</a>
-<a href="contact.html">Contacts</a>
-<a href="veille.html" class="active">Veille</a>
-
-<button id="theme-toggle" aria-label="Changer le thème">☀️</button>
-
-</div>
-
-</nav>
-
-<section>
-
-<h2 class="typewriter"> Veille Technologique</h2>
-
-<div class="veille-header">
-    <h1>Veille sur les Ransomwares</h1>
-    <p>BTS SIO Option SISR - 2024-2025</p>
-</div>
-
-<div class="veille-sujet">
-    <h3>Sujet : L'évolution des ransomwares en 2024-2025</h3>
-    <p>Analyse des tendances récentes en matière d'attaques par ransomwares, l'impact de l'IA générative, l'émergence de nouveaux groupes cybercriminels, et les stratégies de défense des organisations.</p>
-</div>
-
-<div class="sources-list">
-    <span class="source-badge">CERT-FR</span>
-    <span class="source-badge">ANSSI</span>
-    <span class="source-badge">The Hacker News</span>
-    <span class="source-badge">LeMagIT</span>
-    <span class="source-badge">Help Net Security</span>
-    <span class="source-badge">Infosecurity Magazine</span>
-    <span class="source-badge">Global Security Mag</span>
-</div>
-
-<!-- Conteneur pour les flux RSS -->
-<div id="rss-flux" class="rss-container"></div>
-
-<!-- Contexte et analyse -->
-<div class="contexte-veille">
-    <h3>Contexte de la veille</h3>
-    
-    <div class="stat-grid">
-        <div class="stat-card">
-            <div class="stat-number">24%</div>
-            <div class="stat-label">Organisations victimes en 2025</div>
+    <nav>
+        <h3>Tristan MOMHA</h3>-
+        <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="presentation.html">Présentation</a>
+            <a href="competences.html">Compétences</a>
+            <a href="projets.html">Projets</a>
+            <a href="stage.html">Stage</a>
+            <a href="parcours.html">Parcours</a>
+            <a href="veille.html" class="active">Veille</a>
+            <a href="cv.html">CV</a>
+            <a href="contact.html">Contacts</a>
+            <button id="theme-toggle" aria-label="Changer le thème">☀️</button>
         </div>
-        <div class="stat-card">
-            <div class="stat-number">+25%</div>
-            <div class="stat-label">Augmentation des attaques</div>
+    </nav>
+
+    <section>
+        <h2 class="typewriter">Veille Technologique</h2>
+
+        <div class="veille-header">
+            <h1>Veille sur les Ransomwares</h1>
+            <p>BTS SIO Option SISR - 2024-2026</p>
         </div>
-        <div class="stat-card">
-            <div class="stat-number">88</div>
-            <div class="stat-label">Groupes actifs en 2025</div>
+
+        <div class="veille-sujet">
+            <h3>Sujet : L'évolution des ransomwares en 2024-2025</h3>
+            <p>Analyse des tendances récentes en matière d'attaques par ransomwares, l'impact de l'IA générative, l'émergence de nouveaux groupes cybercriminels, et les stratégies de défense des organisations.</p>
         </div>
-        <div class="stat-card">
-            <div class="stat-number">13%</div>
-            <div class="stat-label">Victimes qui paient</div>
+
+        <div class="sources-list">
+            <span class="source-badge">CERT-FR</span>
+            <span class="source-badge">ANSSI</span>
+            <span class="source-badge">LeMagIT</span>
+            <span class="source-badge">Le Monde Informatique</span>
+            <span class="source-badge">Global Security Mag</span>
+            <span class="source-badge">The Hacker News</span>
+            <span class="source-badge">BleepingComputer</span>
         </div>
-    </div>
 
-    <h4>Principales évolutions</h4>
-    <ul>
-        <li><strong>IA générative</strong> : Utilisation croissante pour automatiser les campagnes de phishing et créer des leurres hyperréalistes</li>
-        <li><strong>Nouveaux groupes</strong> : 35 groupes inédits émergés en 2025, dont Qilin qui devient leader (12,5% de parts de marché)</li>
-        <li><strong>Vecteurs d'attaque</strong> : Déclin du phishing (46% contre 52% en 2024), hausse des terminaux compromis (26%)</li>
-        <li><strong>Résilience</strong> : 62% utilisent des sauvegardes immuables, 82% ont un plan de reprise</li>
-    </ul>
-</div>
+        <!-- Conteneur pour les flux RSS -->
+        <div id="rss-flux" class="rss-container"></div>
 
-</section>
+        <!-- Contexte et analyse -->
+        <div class="contexte-veille">
+            <h3>Contexte de la veille</h3>
+            
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">24%</div>
+                    <div class="stat-label">Organisations victimes en 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">+25%</div>
+                    <div class="stat-label">Augmentation des attaques</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">88</div>
+                    <div class="stat-label">Groupes actifs en 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">13%</div>
+                    <div class="stat-label">Victimes qui paient</div>
+                </div>
+            </div>
 
-<footer>
+            <h4>Principales évolutions</h4>
+            <ul>
+                <li><strong>IA générative</strong> : Utilisation croissante pour automatiser les campagnes de phishing et créer des leurres hyperréalistes</li>
+                <li><strong>Nouveaux groupes</strong> : 35 groupes inédits émergés en 2025, dont Qilin qui devient leader (12,5% de parts de marché)</li>
+                <li><strong>Vecteurs d'attaque</strong> : Déclin du phishing (46% contre 52% en 2024), hausse des terminaux compromis (26%)</li>
+                <li><strong>Résilience</strong> : 62% utilisent des sauvegardes immuables, 82% ont un plan de reprise</li>
+            </ul>
+        </div>
+    </section>
 
-<p>© 2026 Tristan MOMHA</p>
+    <footer>
+        <p>© 2026 Tristan MOMHA</p>
+    </footer>
 
-</footer>
-
-<script src="js/script.js" defer></script>
-<script src="js/rss-veille.js" defer></script>
-
+    <!-- jQuery en premier -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/script.js"></script>
+<script src="js/veille-rss.js"></script> <!-- Nouveau fichier -->
 </body>
-
 </html>
