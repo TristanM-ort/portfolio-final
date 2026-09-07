@@ -1271,3 +1271,99 @@ color:var(--muted);
 font-size:13px;
 margin-top:30px;
 }
+
+/* SKILLS GRID - Remplacement des barres */
+.skills {
+display:grid;
+gap:18px;
+}
+
+.skill-item {
+background:var(--card);
+padding:22px 28px;
+border-radius:14px;
+border-left:5px solid var(--accent);
+transition:all 0.3s ease;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.skill-item:hover {
+transform:translateX(10px);
+border-left-color:var(--accent2);
+box-shadow:0 8px 25px rgba(56,189,248,0.15);
+}
+
+.skill-item h3 {
+color:var(--accent);
+font-size:1.15rem;
+margin-bottom:8px;
+font-weight:600;
+}
+
+.skill-item p {
+color:var(--muted);
+font-size:0.95rem;
+line-height:1.6;
+margin:0;
+}
+
+/* Petite touche responsive */
+@media(max-width:700px){
+.skill-item {
+padding:18px 20px;
+}
+.skill-item h3 {
+font-size:1rem;
+}
+.skill-item p {
+font-size:0.9rem;
+}
+}
+
+/* Light mode skills */
+body.light-mode .skill-item {
+border-left-color:var(--accent);
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.skill-item {
+  background: var(--card);
+  padding: 22px 28px;
+  border-radius: 14px;
+  border-left: 5px solid var(--accent);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.skill-item:hover {
+  transform: translateX(10px);
+  border-left-color: var(--accent2);
+  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.15);
+}
+
+.skill-item h3 {
+  color: var(--accent);
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.skill-item p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Petite touche responsive */
+@media (max-width: 700px) {
+  .skill-item {
+    padding: 18px 20px;
+  }
+  .skill-item h3 {
+    font-size: 1rem;
+  }
+  .skill-item p {
+    font-size: 0.9rem;
+  }
+}
